@@ -12,7 +12,27 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9d1514134bc4fbd41bb739b1b9a49231, type: 3}
   m_Name: FloorTile
   m_EditorClassIdentifier: 
-  m_DefaultSprite: {fileID: 0}
+  m_DefaultSprite: {fileID: 21300000, guid: 57b5c601824311d4caab9a03762314a8, type: 3}
   m_DefaultGameObject: {fileID: 0}
   m_DefaultColliderType: 1
-  m_TilingRules: []
+  m_TilingRules:
+  - m_Id: 0
+    m_Sprites:
+    - {fileID: 21300000, guid: 57b5c601824311d4caab9a03762314a8, type: 3}
+    - {fileID: 21300000, guid: 644c3c03a9b1f5946a71be1c553cdd92, type: 3}
+    - {fileID: 21300000, guid: 464f72f0c65d2a8448b2f5a8d84f064c, type: 3}
+    - {fileID: 21300000, guid: 0fc072b2dc5092349ae8c1a0c21612df, type: 3}
+    - {fileID: 21300000, guid: dcb0ee98e02e3934ead3333938334314, type: 3}
+    - {fileID: 21300000, guid: 7a679c34c3707da4b8ecac00248837a8, type: 3}
+    - {fileID: 21300000, guid: 572135766165e1847b1c267397ddc481, type: 3}
+    - {fileID: 21300000, guid: ff3d5dfb6f81428478b54ad4b3f4eeee, type: 3}
+    m_GameObject: {fileID: 0}
+    m_MinAnimationSpeed: 1
+    m_MaxAnimationSpeed: 1
+    m_PerlinScale: 0.463
+    m_Output: 1
+    m_ColliderType: 1
+    m_RandomTransform: 0
+    m_Neighbors: 
+    m_NeighborPositions: []
+    m_RuleTransform: 0

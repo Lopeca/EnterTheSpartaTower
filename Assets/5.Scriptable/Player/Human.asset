@@ -12,3 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3cac9c93309a2744e97e75ca86726f01, type: 3}
   m_Name: Human
   m_EditorClassIdentifier: 
+  maxHp: 100
+  maxStamina: 100
+  staminaRegenRate: 10
+  moveSpeed: 5
+  attackDamageRatio: 1.5
+  attackSpeedRatio: 0.87
