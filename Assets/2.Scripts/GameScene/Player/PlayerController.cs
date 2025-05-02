@@ -13,6 +13,8 @@ public enum PlayerState
 }
 public class PlayerController : MonoBehaviour
 {
+    private static readonly int isMoving = Animator.StringToHash("IsMove");
+
     private PlayerStatHandler playerStatHandler;
     public PlayerStatHandler PlayerStatHandler {  get { return playerStatHandler; } }
 
@@ -24,6 +26,7 @@ public class PlayerController : MonoBehaviour
 
     public SpriteRenderer sprite;
     public Rigidbody2D rb;
+    public Animator animator;
 
     IDash dash;
 
@@ -51,11 +54,18 @@ public class PlayerController : MonoBehaviour
 
     private void Move()
     {
-        rb.velocity = moveDirection * playerStatHandler.playerStatData.MoveSpeed; 
-        if(rb.velocity != Vector2.zero)     
+        rb.velocity = moveDirection * playerStatHandler.playerStatData.MoveSpeed;
+
+        if (rb.velocity != Vector2.zero)
+        {
             playerState = PlayerState.Move;
+            animator.SetBool(isMoving, true);
+        }
         else
+        {
             playerState = PlayerState.Idle;
+            animator.SetBool(isMoving, false);
+        }
     }
 
     public void ChangeState(PlayerState state)

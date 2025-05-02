@@ -29,4 +29,9 @@ public class GameUI : MonoBehaviour
     {
         staminaSlider.value = percentage;
     }
+
+    private void OnDisable()
+    {
+        player.PlayerStatHandler.OnChangeStamina -= UpdateStaminaSlider;
+    }
 }

@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Accelerate : MonoBehaviour, IDash
+public class SimpleDash : MonoBehaviour, IDash
 {
     public PlayerController Player { get; private set; }
     public PlayerStatHandler StatHandler { get; private set; }
@@ -31,7 +31,6 @@ public class Accelerate : MonoBehaviour, IDash
         if (!Player.IsMoving) return;
         if (!StatHandler.HasEnoughStamina(staminaCost)) return;
 
-        Debug.Log("´ë½Ã!");
         Player.moveControlLocked = true;
         Player.ChangeState(PlayerState.Dash);
         StatHandler.ConsumeStamina(staminaCost);
