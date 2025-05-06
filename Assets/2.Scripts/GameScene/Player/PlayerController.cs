@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -29,6 +30,7 @@ public class PlayerController : MonoBehaviour
     public Animator animator;
 
     IDash dash;
+    public InteractHandler interactHandler;
 
     public bool moveControlLocked;
     void Awake()
@@ -46,11 +48,15 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        sprite.sortingOrder = GameUtility.SortByPos(transform.position.y);
+        interactHandler.UpdateInteractTarget();
         if (!moveControlLocked)
         {
             Move();
         }
     }
+
+    
 
     private void Move()
     {
@@ -72,6 +78,8 @@ public class PlayerController : MonoBehaviour
     {
         this.playerState = state;
     }
+
+   
     private void OnMove(InputValue inputValue)
     {
         moveDirection = inputValue.Get<Vector2>().normalized;   
@@ -104,6 +112,14 @@ public class PlayerController : MonoBehaviour
         if (!moveControlLocked)
         {
             dash.TriggerDash();
+        }
+    }
+
+    void OnInteract()
+    {
+        if (!moveControlLocked)
+        {
+            interactHandler.Interact();
         }
     }
 }

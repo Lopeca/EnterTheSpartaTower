@@ -7,6 +7,7 @@ public class SimpleDash : MonoBehaviour, IDash
 {
     public PlayerController Player { get; private set; }
     public PlayerStatHandler StatHandler { get; private set; }
+    public AudioClip dashSE;
 
     private float duration;
     private float elapsedTime;
@@ -34,6 +35,7 @@ public class SimpleDash : MonoBehaviour, IDash
         Player.moveControlLocked = true;
         Player.ChangeState(PlayerState.Dash);
         StatHandler.ConsumeStamina(staminaCost);
+        AudioManager.Instance.PlaySFX(dashSE);
 
         Player.rb.velocity *= speedMultiplier;
         isActivated = true;

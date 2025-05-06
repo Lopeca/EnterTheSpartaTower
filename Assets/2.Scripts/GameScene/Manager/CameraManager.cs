@@ -45,7 +45,7 @@ public class CameraManager : MonoBehaviour
         float camHalfHeight = _camera.orthographicSize;
         float camHalfWidth = camHalfHeight * _camera.aspect;
 
-        Vector3 colliderPos = targetCollider.transform.position;
+        Vector3 colliderPos = targetCollider.transform.position + (Vector3)targetCollider.offset;
 
         float colHalfWidth = targetCollider.size.x / 2;
         float colHalfHeight = targetCollider.size.y / 2;

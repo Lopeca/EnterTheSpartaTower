@@ -66,4 +66,9 @@ public class PlayerStatHandler : MonoBehaviour
         return playerStatData.AttackDamageRatio;
     }
     
+    public void LoadStatState(float hp, float stamina)
+    {
+        CurrentHP = hp;
+        CurrentStamina = stamina;
+    }
 }

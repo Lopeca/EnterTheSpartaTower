@@ -9,6 +9,6 @@ public class CameraLocation : MonoBehaviour
     void OnDrawGizmosSelected()
     {
         Gizmos.color = layerColor; // 연두 투명
-        Gizmos.DrawCube(transform.position, boxCollider2D.size);
+        Gizmos.DrawCube(transform.position+(Vector3)boxCollider2D.offset, boxCollider2D.size);
     }
 }

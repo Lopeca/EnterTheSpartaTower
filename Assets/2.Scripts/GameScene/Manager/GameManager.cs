@@ -22,4 +22,17 @@ public class GameManager : MonoBehaviour
             Destroy(gameObject);
         }
     }
+
+    private void Start()
+    {
+        if (GameStateCarrier.Instance.isFirstLoad)
+        {
+            GameStateCarrier.Instance.isFirstLoad = false;
+            return;
+        }
+
+        GameStateCarrier.Instance.LoadState();
+    }
+
+
 }
