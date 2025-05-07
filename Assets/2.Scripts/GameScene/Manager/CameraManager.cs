@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using static UnityEditor.FilePathAttribute;
 using static UnityEditor.PlayerSettings;
 
 public class CameraManager : MonoBehaviour
@@ -9,9 +10,12 @@ public class CameraManager : MonoBehaviour
     public static CameraManager Instance { get; private set; }
 
     public Camera _camera;
-    public GameObject target;
-    public BoxCollider2D defaultLocation;
-    public BoxCollider2D currentLocation;
+    public GameObject player;
+    public List<Location> touchingLocations;
+
+    Location CurrentLocation => touchingLocations.Count > 0 ? touchingLocations[0] : null;
+
+    private Vector3 destination;
 
     private float lerpSpeed = 8f;
     // Start is called before the first frame update
@@ -30,14 +34,48 @@ public class CameraManager : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
-        Vector3 destination = target.transform.position;
+        if (CurrentLocation == null)
+        {
+            SetDestinationToPlayer();
+            _camera.transform.position = Vector3.Lerp(_camera.transform.position, destination, lerpSpeed * Time.fixedDeltaTime);
+            _camera.orthographicSize = Mathf.Lerp(_camera.orthographicSize, 5, lerpSpeed * Time.fixedDeltaTime);
+        }
+        else
+        {
+            switch (CurrentLocation.locationType)
+            {
+                case LocationType.Default:
+                    SetDestinationToPlayer();
+                    SetCameraIntention(CurrentLocation, destination);
+                    break;
+                case LocationType.AreaLocked:
+                    SetDestinationToPlayer();
+                    BoxCollider2D targetLocationCollider = CurrentLocation.boxCollider2D;
+                    destination = KeepCameraInLocation(targetLocationCollider, destination);
+                    SetCameraIntention(CurrentLocation, destination);
+                    break;
+                case LocationType.CameraPosFixed:
+                    destination = CurrentLocation.transform.position;
+                    //destination.z = _camera.transform.position.z;
+                    SetCameraIntention(CurrentLocation, destination);
+                    break;
+            }
+        }
+    }
+
+    private void SetDestinationToPlayer()
+    {
+        destination.x = player.transform.position.x;
+        destination.y = player.transform.position.y;
         destination.z = _camera.transform.position.z;
+    }
 
-        BoxCollider2D targetLocation = currentLocation != null ? currentLocation : defaultLocation;
-
-        destination = KeepCameraInLocation(targetLocation, destination);
-
+    private void SetCameraIntention(Location location, Vector3 destination)
+    {      
+        float zoomSize = location.ZoomSize;
+        
         _camera.transform.position = Vector3.Lerp(_camera.transform.position, destination, lerpSpeed * Time.fixedDeltaTime);
+        _camera.orthographicSize = Mathf.Lerp(_camera.orthographicSize, zoomSize, lerpSpeed * Time.fixedDeltaTime);
     }
 
     private Vector3 KeepCameraInLocation(BoxCollider2D targetCollider, Vector3 destination)

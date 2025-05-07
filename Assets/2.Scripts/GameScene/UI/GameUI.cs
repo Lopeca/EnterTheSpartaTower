@@ -16,6 +16,7 @@ public class GameUI : MonoBehaviour
     {
         player = GameManager.Instance.Player;
 
+        player.PlayerStatHandler.OnChangeHP += UpdateHPSlider;
         player.PlayerStatHandler.OnChangeStamina += UpdateStaminaSlider; 
         UpdateHPSlider(1);
         UpdateStaminaSlider(1);

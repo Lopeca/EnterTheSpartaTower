@@ -8,6 +8,10 @@ public class InteractHandler : MonoBehaviour
     public List<GameObject> interactableList;
     [SerializeField] IInteractable interactTarget;
 
+    private void Update()
+    {
+        UpdateInteractTarget();
+    }
     public void Interact()
     {
         interactTarget?.Interact();

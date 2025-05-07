@@ -26,6 +26,13 @@ public class GameStateCarrier : MonoBehaviour
         }
     }
 
+    public void ResetState()
+    {
+        PlayerStatHandler stats = GameManager.Instance.Player.PlayerStatHandler;
+        lastHP = stats.MaxHP;
+        lastStamina = stats.MaxStamina;
+        playerPos = GameManager.Instance.startingPos;
+    }
     public void SaveState()
     {
         PlayerController player = GameManager.Instance.Player;

@@ -19,6 +19,7 @@ public class AudioManager : MonoBehaviour
         if(Instance == null)
         {
             Instance = this;
+            DontDestroyOnLoad(gameObject);
         }
         else
         {
@@ -44,9 +45,8 @@ public class AudioManager : MonoBehaviour
 
     public void PlaySFX(AudioClip clip)
     {
+        if (sfxPool.Count == 0) return;
         AudioSource audioSource = sfxPool.Dequeue();
-
-        if (audioSource == null) return;
 
         audioSource.clip = clip;
         audioSource.Play();

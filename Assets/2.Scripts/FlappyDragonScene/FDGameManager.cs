@@ -7,6 +7,7 @@ using UnityEngine.SceneManagement;
 public enum FDGameState
 {
     Home,
+    HowTo,
     Play,
     Result
 }
@@ -50,12 +51,25 @@ public class FDGameManager : MonoBehaviour
     {
         if (gameState == FDGameState.Home)
         {
-            // 만들고보니 지금은 결과창과 같은 기능을 해서 일단 이렇게 둡니다.
-            HandleResultState();
+            if (Input.GetKeyDown(KeyCode.Space))
+            {
+                ChangeGameState(FDGameState.HowTo);
+            }
+            if (Input.GetKeyDown(KeyCode.Escape))
+            {
+                SceneManager.LoadScene("GameScene");
+            }
         }
-        if (gameState == FDGameState.Play)
+        else if (gameState == FDGameState.HowTo)
+        {
+            if (Input.GetKeyDown(KeyCode.Space))
+            {
+                StartGame();
+            }
+        }
+        else if (gameState == FDGameState.Play)
             Time.timeScale *= 1 + 0.03f * Time.deltaTime;
-        if (gameState == FDGameState.Result)
+        else if (gameState == FDGameState.Result)
         {
             HandleResultState();
         }
@@ -69,6 +83,7 @@ public class FDGameManager : MonoBehaviour
         }
         if (Input.GetKeyDown(KeyCode.Escape))
         {
+            Destroy(AudioManager.Instance.gameObject);
             SceneManager.LoadScene("GameScene");
         }
     }

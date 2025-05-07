@@ -9,6 +9,7 @@ public class FDUIManager : MonoBehaviour
     public static FDUIManager Instance { get; private set; }
 
     public GameObject homeUI;
+    public GameObject howToUI;
     public GameObject playUI;
     public GameObject resultUI;
 
@@ -50,6 +51,9 @@ public class FDUIManager : MonoBehaviour
         {
             case FDGameState.Home:
                 SwitchUI(homeUI);
+                break;
+            case FDGameState.HowTo:
+                SwitchUI(howToUI);
                 break;
             case FDGameState.Play:
                 SwitchUI(playUI);

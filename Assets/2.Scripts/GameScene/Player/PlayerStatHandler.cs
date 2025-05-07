@@ -9,6 +9,8 @@ public class PlayerStatHandler : MonoBehaviour
     [field: SerializeField] public float CurrentHP { get; private set; }
     [field: SerializeField] public float CurrentStamina { get; private set; }
 
+    public float MaxHP => playerStatData.MaxHp;
+    public float MaxStamina => playerStatData.MaxStamina;
     public bool isInvincible;
 
     public event Action<float> OnChangeHP;
@@ -26,6 +28,13 @@ public class PlayerStatHandler : MonoBehaviour
         AutoRecover();
     }
 
+    public void FullRecover()
+    {
+        CurrentStamina = MaxStamina;
+        CurrentHP = MaxHP;
+        OnChangeHP?.Invoke(1);
+        OnChangeStamina?.Invoke(1);
+    }
     private void AutoRecover()
     {
         CurrentStamina += playerStatData.StaminaRegenRage * Time.deltaTime;

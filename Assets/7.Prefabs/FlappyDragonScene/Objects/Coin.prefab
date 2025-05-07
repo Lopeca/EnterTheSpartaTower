@@ -121,7 +121,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   score: 1
-  coinSE: {fileID: 8300000, guid: 621a0405b91f9b740abb9dc58ab9e252, type: 3}
+  coinSE: {fileID: 8300000, guid: 76851359a64102b49894b29d1ddbc58a, type: 3}
 --- !u!61 &7743998627066252351
 BoxCollider2D:
   m_ObjectHideFlags: 0
